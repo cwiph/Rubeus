@@ -35,6 +35,9 @@ jobs:
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@2008f912f56e61277eefaac6d1888b750582aa16 
     
+    - name: actual build
+      run: dotnet build --configuration Release
+     
     - uses: actions/checkout@v2
 
     - uses: actions/download-artifact@v2
