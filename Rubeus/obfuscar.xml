@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Obfuscator>
+  <Var name="InPath" value="$(Env:GITHUB_WORKSPACE)\Rubeus\bin\Release\" />
+  <Var name="OutPath" value=".\Obfuscar" />
+  <Var name="KeepPublicApi" value="false" />
+  <Var name="HidePrivateApi" value="true" />
+  <Var name="HideStrings" value="true" />
+  <Module file="$(InPath)\SpicyRub.exe" />
+</Obfuscator>
