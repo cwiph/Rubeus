@@ -15,8 +15,16 @@ jobs:
         run: |
           cd "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\"
           .\MSBuild.exe /p:Configuration=Release $Env:GITHUB_WORKSPACE\Rubeus\Rubeus.csproj       
-          
+     
+      - name: Invoke Obfuscar
+        run: obfuscar.console.exe $Env:GITHUB_WORKSPACE\Rubeus\obfuscar.xml 
+           
       - uses: actions/upload-artifact@master
         with:
           name: Rubeus
-          path: Rubeus\bin\Release\Rubeus.exe 
+          path: Rubeus\bin\Release\Rubeus.exe
+          
+      - uses: actions/upload-artifact@master
+        with:
+          name: Rubeus_Obfuscar
+          path: Rubeus\bin\Release\Obfuscar\SpicyRub.exe
