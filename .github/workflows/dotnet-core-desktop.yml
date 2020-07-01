@@ -78,5 +78,5 @@ jobs:
       uses: actions/upload-artifact@v1.0.0
       with:
         name: Rubeus.exe
-        path: Rubeus/bin/Release/Rubeus.exe
+        path: bin/Release/Rubeus.exe
    
