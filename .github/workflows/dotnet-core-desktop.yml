@@ -1,53 +1,23 @@
-name: .NET Core Desktop
+name: Rubeus-Build
 
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
-
+on: [push]
 jobs:
-
   build:
-
+    runs-on: windows-latest
     strategy:
       matrix:
         configuration: [Release]
-
-    runs-on: windows-latest  # For a list of available runner types, refer to 
-                             # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
-    env:
-      Solution_Name: Rubeus                         # Replace with your solution name, i.e. MyWpfApp.sln.
     
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
- 
-    # Install the .NET Core workload
-    - name: Install .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 3.5.x
-
-    # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
-    - name: Setup MSBuild.exe
-      uses: microsoft/setup-msbuild@2008f912f56e61277eefaac6d1888b750582aa16 
-    
-    - name: actual build
-      run: dotnet build --configuration Release
-     
-    - uses: actions/checkout@v2
-
-    - uses: actions/download-artifact@v2
-
-    - name: Display structure of downloaded files
-      run: ls -R
-        
+         
+      - uses: actions/checkout@v1
       
-
-
-
-
-
+      - name: Build Rubeus
+        run: |
+          cd "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\"
+          .\MSBuild.exe $Env:GITHUB_WORKSPACE\Seatbelt\Seatbelt.csproj  
+           
+      - uses: actions/upload-artifact@master
+        with:
+          name: Rubeus
+          path: Rubeus\bin\Release\Rubeus.exe 
