@@ -1,4 +1,4 @@
-name: Rubeus-Build
+name: cw-build
 
 on: [push]
 jobs:
