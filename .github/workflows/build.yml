@@ -6,8 +6,8 @@ jobs:
     - name: prebuildmarker
       run: Write-Host asdf
     - name: Build Rubeus
-      run: cd "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\"
-        .\MSBuild.exe /p:Platform=x64 /p:Configuration=Release $Env:GITHUB_WORKSPACE\Rubeus\Rubeus.csproj
+      run: '| cd "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\"
+        /p:Platform=x64 .\MSBuild.exe /p:Platform=x64 /p:Configuration=Release $Env:GITHUB_WORKSPACE\Rubeus\Rubeus.csproj'
     - name: postbuildmarker
       run: Write-Host asdf
     - uses: actions/upload-artifact@master
