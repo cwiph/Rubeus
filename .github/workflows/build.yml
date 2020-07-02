@@ -1,27 +1,23 @@
-name: Rubeus-Build
-
-on: [push]
 jobs:
   build:
     runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: prebuildmarker
+      run: Write-Host asdf
+    - name: Build Rubeus
+      run: cd "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\"
+        ; .\MSBuild.exe /p:Platform=x64 /p:Configuration=Release $Env:GITHUB_WORKSPACE\Rubeus\Rubeus.csproj
+    - name: postbuildmarker
+      run: Write-Host asdf
+    - uses: actions/upload-artifact@master
+      with:
+        name: Rubeus
+        path: Rubeus\bin\Release\Rubeus.exe
     strategy:
       matrix:
-        configuration: [Release]
-    
-    steps:
-         
-      - uses: actions/checkout@v1
-      
-      - name: prebuildmarker
-        run: Write-Host asdf
-      
-      - name: Build Rubeus
-        run:  cd "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\" ; .\MSBuild.exe /p:Configuration=Release $Env:GITHUB_WORKSPACE\Rubeus\Rubeus.csproj  
-       
-      - name: postbuildmarker
-        run: Write-Host asdf
-       
-      - uses: actions/upload-artifact@master
-        with:
-          name: Rubeus
-          path: Rubeus\bin\Release\Rubeus.exe 
+        configuration:
+        - Release
+name: Rubeus-Build
+on:
+- push
